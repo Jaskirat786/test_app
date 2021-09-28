@@ -1,7 +1,7 @@
 package com.example.zivame_assignment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,14 +10,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.zivame_assignment.adapter.PrdouctRecyclerAdapter;
+import com.example.zivame_assignment.adapter.ProductsAdapterListener;
 import com.example.zivame_assignment.databinding.ActivityDashboardBinding;
 import com.example.zivame_assignment.model.Products;
 import com.example.zivame_assignment.viewmodel.DashboardViewmodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements ProductsAdapterListener {
 
     private ActivityDashboardBinding binding;
     private DashboardViewmodel viewModel;
@@ -34,28 +36,27 @@ public class DashboardActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new PrdouctRecyclerAdapter(productsList, this);
-        binding.recyclerView.setAdapter(adapter);
+        adapter = new PrdouctRecyclerAdapter(productsList, this, this);
 
         viewModel = new ViewModelProvider(this).get(DashboardViewmodel.class);
 
-        viewModel.getProductListObserver().observe(this, new Observer<List<Products>>() {
-
+        viewModel.getAllProducts().observe(this, new Observer<List<Products>>() {
             @Override
             public void onChanged(List<Products> products) {
 
-                if (products != null) {
-                    productsList = products;
-                    adapter.setProductList(products);
-                    binding.errorText.setVisibility(View.GONE);
-                } else {
-                    binding.errorText.setVisibility(View.VISIBLE);
-                }
-
+                binding.recyclerView.setAdapter(adapter);
+                adapter.setProductList(products);
             }
         });
         viewModel.callAPI();
+    }
 
+    @Override
+    public void onItemClicked(Products products) {
+
+        Intent i = new Intent(this, CartActivity.class);
+        i.putExtra("extra_product_id",products.getId());
+        startActivity(i);
 
     }
 }

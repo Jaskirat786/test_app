@@ -1,13 +1,16 @@
 package com.example.zivame_assignment.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.zivame_assignment.CartActivity;
 import com.example.zivame_assignment.databinding.DasboardItemBinding;
 import com.example.zivame_assignment.model.Products;
 
@@ -17,10 +20,12 @@ public class PrdouctRecyclerAdapter extends RecyclerView.Adapter<PrdouctRecycler
 
     private List<Products> productList;
     private Context context;
+    private ProductsAdapterListener adapterListener;
 
-    public PrdouctRecyclerAdapter(List<Products> productList, Context context) {
+    public PrdouctRecyclerAdapter(List<Products> productList, Context context,ProductsAdapterListener adapterListener) {
         this.productList = productList;
         this.context = context;
+        this.adapterListener=adapterListener;
     }
 
     public void setProductList(List<Products> productList) {
@@ -38,9 +43,7 @@ public class PrdouctRecyclerAdapter extends RecyclerView.Adapter<PrdouctRecycler
                 parent,
                 false
         );
-
         return new ProductViewHolder(binding);
-
     }
 
     @Override
@@ -56,7 +59,6 @@ public class PrdouctRecyclerAdapter extends RecyclerView.Adapter<PrdouctRecycler
             return productList.size();
         }
         return 0;
-
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
@@ -67,14 +69,19 @@ public class PrdouctRecyclerAdapter extends RecyclerView.Adapter<PrdouctRecycler
         public ProductViewHolder(@NonNull DasboardItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    adapterListener.onItemClicked(products);
+                }
+            });
         }
 
         public void setList(Products products) {
-            ;
             this.products = products;
 
-            String rating= products.getRating()+ "";
-
+            String rating = products.getRating() + "";
             binding.productName.setText(products.getName());
             binding.productPrice.setText(products.getPrice());
             binding.productRating.setText(rating);

@@ -7,8 +7,6 @@ import retrofit2.http.GET;
 
 public interface APIService {
 
-
     @GET("db")
     Call<ProductModel>getProductList();
-
 }

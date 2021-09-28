@@ -1,21 +1,52 @@
 package com.example.zivame_assignment.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Expose;
+
+@Entity(tableName = "products")
 public class Products {
 
-    @SerializedName("name")
-    @Expose
+    @PrimaryKey
+    @NonNull
+
+    @ColumnInfo(name = "ID")
+    private Integer id;
+
+    @ColumnInfo(name = "product_name")
     private String name;
-    @SerializedName("price")
-    @Expose
+
+    @ColumnInfo(name = "product_price")
     private String price;
+
     @SerializedName("image_url")
     @Expose
+    @ColumnInfo(name = "product_images")
     private String imageUrl;
-    @SerializedName("rating")
-    @Expose
+
+    @ColumnInfo(name = "product_rating")
     private Integer rating;
+
+    public Products(@NonNull Integer id, String name, String price, String imageUrl, Integer rating) {
+        this.id=id;
+        this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+    }
+
+    @NonNull
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(@NonNull Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
