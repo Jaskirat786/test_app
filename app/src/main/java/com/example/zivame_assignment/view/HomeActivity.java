@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.zivame_assignment.adapter.PrdouctRecyclerAdapter;
 import com.example.zivame_assignment.adapter.ProductsAdapterListener;
-import com.example.zivame_assignment.databinding.ActivityDashboardBinding;
+import com.example.zivame_assignment.databinding.ActivityHomeBinding;
 import com.example.zivame_assignment.model.Products;
 import com.example.zivame_assignment.viewmodel.DashboardViewModel;
 import com.example.zivame_assignment.viewmodel.ProductsViewModelFactory;
@@ -22,9 +22,9 @@ import com.example.zivame_assignment.viewmodel.ProductsViewModelFactory;
 import java.util.List;
 
 
-public class DashboardActivity extends AppCompatActivity implements ProductsAdapterListener {
+public class HomeActivity extends AppCompatActivity implements ProductsAdapterListener {
 
-    private ActivityDashboardBinding binding;
+    private ActivityHomeBinding binding;
     private DashboardViewModel viewModel;
     private List<Products> productsList;
     private PrdouctRecyclerAdapter adapter;
@@ -35,7 +35,7 @@ public class DashboardActivity extends AppCompatActivity implements ProductsAdap
         super.onCreate(savedInstanceState);
 
         //binding activity with xml layout
-        binding = ActivityDashboardBinding.inflate(getLayoutInflater());
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         //binding recycler view to layout manager
@@ -68,17 +68,17 @@ public class DashboardActivity extends AppCompatActivity implements ProductsAdap
 
         //showing progress bar
         binding.bar.setVisibility(View.VISIBLE);
-        Handler handler=new Handler();
+        Handler handler = new Handler();
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 binding.bar.setVisibility(View.GONE);
-                Intent i = new Intent(DashboardActivity.this, CartActivity.class);
+                Intent i = new Intent(HomeActivity.this, CartActivity.class);
                 i.putExtra("extra_product_id", products.getId());
                 startActivity(i);
             }
-        },2000);
+        }, 2000);
     }
 
     @Override

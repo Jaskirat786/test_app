@@ -22,7 +22,7 @@
             android:name=".view.CartActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".view.DashboardActivity"
+            android:name=".view.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
