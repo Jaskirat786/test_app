@@ -1,17 +1,9 @@
 package com.example.zivame_assignment.viewmodel;
-
-import android.app.Application;
-
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.example.zivame_assignment.Network.ProductRepository;
 import com.example.zivame_assignment.database.ProductDao;
 import com.example.zivame_assignment.model.Products;
-
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 public class CartViewModel extends ViewModel {
@@ -24,6 +16,7 @@ public class CartViewModel extends ViewModel {
         this.executorService = executorService;
     }
 
+    //Fetching products according to id
     public void fetchProduct(Integer id) {
 
         executorService.execute(() -> {
@@ -33,7 +26,6 @@ public class CartViewModel extends ViewModel {
                 _productLiveData.postValue(product);
                 return;
             }
-
         });
     }
 

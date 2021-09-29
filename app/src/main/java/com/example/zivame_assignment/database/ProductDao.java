@@ -14,8 +14,9 @@ import java.util.List;
 @Dao
 public interface ProductDao {
 
+    //Performing various CRUD operations
     @Query("Select * from products")
-    LiveData<List<Products>> getAllProducts();
+    List<Products> getAllProducts();
 
     @Query("Select * from products WHERE ID =:id")
     Products getProduct(Integer id);

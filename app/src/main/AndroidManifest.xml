@@ -13,16 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zivame_assignment">
         <activity
-            android:name=".OrderPlacedActivity"
+            android:name=".view.OrderPlacedActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
 
         <activity
-            android:name=".CartActivity"
+            android:name=".view.CartActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".DashboardActivity"
+            android:name=".view.DashboardActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>

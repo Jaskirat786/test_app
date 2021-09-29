@@ -31,7 +31,6 @@ public abstract class ProductDatabase extends RoomDatabase {
                             ProductDatabase.class,
                             "products-database"
                     ).fallbackToDestructiveMigration()
-                            .addCallback(callback)
                             .allowMainThreadQueries()
                             .build();
                 }
@@ -39,27 +38,5 @@ public abstract class ProductDatabase extends RoomDatabase {
         }
 
         return INSTANCE;
-    }
-
-   static Callback callback=new Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            new AsyncTask(INSTANCE);
-        }
-    };
-    static  class AsyncTask extends android.os.AsyncTask<Void,Void,Void>
-    {
-        private ProductDao productDao;
-        AsyncTask(ProductDatabase productDatabase)
-        {
-            productDao=productDatabase.getProductDao();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            productDao.deleteAll();
-            return null;
-        }
     }
 }

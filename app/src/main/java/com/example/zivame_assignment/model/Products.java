@@ -3,6 +3,7 @@ package com.example.zivame_assignment.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
@@ -13,7 +14,6 @@ public class Products {
 
     @PrimaryKey
     @NonNull
-
     @ColumnInfo(name = "ID")
     private Integer id;
 
@@ -31,13 +31,6 @@ public class Products {
     @ColumnInfo(name = "product_rating")
     private Integer rating;
 
-    public Products(@NonNull Integer id, String name, String price, String imageUrl, Integer rating) {
-        this.id=id;
-        this.name = name;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.rating = rating;
-    }
 
     @NonNull
     public Integer getId() {

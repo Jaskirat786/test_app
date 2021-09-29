@@ -1,7 +1,6 @@
 package com.example.zivame_assignment.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.zivame_assignment.CartActivity;
 import com.example.zivame_assignment.databinding.DasboardItemBinding;
 import com.example.zivame_assignment.model.Products;
 
@@ -86,7 +84,6 @@ public class PrdouctRecyclerAdapter extends RecyclerView.Adapter<PrdouctRecycler
             binding.productPrice.setText(products.getPrice());
             binding.productRating.setText(rating);
             Glide.with(context).load(products.getImageUrl()).into(binding.productImage);
-
         }
     }
 }
